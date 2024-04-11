@@ -1,0 +1,13 @@
+.linenodiv pre span,
+div pre code {
+    font-size: 30px; /* or whatever size you prefer */
+    line-height: 1.2;
+}
+
+
+.codehilitetable .linenos,
+.codehilitetable .code {
+    font-family: Monaco, monospace; /* 你希望使用的字体 */
+    /*line-height: 1.5; !* 调整行高以使其与代码对齐 *!*/
+    /*font-size: 30px; !* 调整字体大小以使其与代码对齐 *!*/
+}

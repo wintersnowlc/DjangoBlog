@@ -1,0 +1,104 @@
+{% load static %}
+{% load blog_tags %}
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>
+        {% block title %}
+            小小草
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'blog/assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/pygments.css' %}">
+    <link rel="stylesheet" href="https://cdn.reflowhq.com/v2/toolkit.min.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&amp;display=swap">
+    <link rel="stylesheet" href="{% static 'blog/assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+    {% block head %}
+
+    {% endblock %}
+</head>
+
+<body>
+<nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container"><a class="navbar-brand" href="{% url 'blog:index' %}">小小草</a>
+        <button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i
+                class="fa fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'blog:index' %}">Home</a></li>
+                {% get_categories as categories %}
+                {% for category in categories %}
+                    <li class="nav-item"><a class="nav-link"
+                                            href="{% url 'blog:category' category.pk %}">{{ category.name }}</a></li>
+                {% endfor %}
+{#                <li class="nav-item"><a class="nav-link" href="{% url 'blog:index' %}">About us</a></li>#}
+                <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Admin</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% block masthead %}
+
+{% endblock %}
+
+<div class="container">
+    <div class="row">
+        {% block content %}
+        {% endblock %}
+
+        <div class="col">
+            <ul>
+                {% get_tags as tags %}
+                {% for tag in tags %}
+                    <li class="nav-item"><a class="nav-link"
+                                            href="{% url 'blog:tag' tag.pk %}">{{ tag.name }}</a></li>
+                {% endfor %}
+
+            </ul>
+            <div data-reflow-type="category-list" data-reflow-layout="unstyled"></div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto">
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </li>
+                    <li class="list-inline-item"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i
+                            class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></li>
+                    <li class="list-inline-item">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </li>
+                </ul>
+                <p class="text-muted copyright">Copyright&nbsp;©&nbsp;Brand 2024</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% block script %}
+    {#<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>#}
+    <script src="https://cdn.staticfile.org/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    {#<script src="https://cdn.reflowhq.com/v2/toolkit.min.js"></script>#}
+    <script src="{% static 'blog/assets/js/bs-init.js' %}"></script>
+    <script src="{% static 'blog/assets/js/clean-blog.js' %}"></script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: >
+      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./db:/app/db  # 挂载数据库文件夹
+      - ./media:/app/media  # 挂载媒体文件夹
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=django-insecure-vg@q7iy76q!43r2lt3%(ce=i6207gypwffjgp_wi=^8g7*txjo
+      - DEBUG=1
